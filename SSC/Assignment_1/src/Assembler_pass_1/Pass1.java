@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 public class Pass1 {
     public static void main(String[] args) throws IOException {
 
-        BufferedReader br = new BufferedReader(new FileReader("/home/prk/Documents/trimester-9/SSC/Assignment_1/src/mlp.asm"));
+        BufferedReader br = new BufferedReader(new FileReader("../mlp.asm"));
         String thisLine;
         int lineNo = 0;
         while((thisLine = br.readLine()) != null) {
