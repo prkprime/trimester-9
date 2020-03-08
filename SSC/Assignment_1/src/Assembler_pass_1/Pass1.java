@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 public class Pass1 {
-    String
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new FileReader("/home/prk/Documents/trimester-9/SSC/Assignment_1/src/mlp.asm"));
