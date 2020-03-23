@@ -6,7 +6,7 @@ class Node:
 
     def print_node_info(self):
         '''prints the node info'''
-        print('\nNode Level = {} Node F Value = {}\nNode matrix : \n'.format(self.level, self.f_value))
+        print('\nNode Level = {}, Node H Value = {}, Node F Value = {}\nNode matrix : \n'.format(self.level,self.f_value-self.level, self.f_value))
         for i in self.matrix:
             for j in i:
                 print(j, '\t', end="")
