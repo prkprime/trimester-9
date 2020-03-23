@@ -16,8 +16,13 @@ class Puzzle:
         '''finding the f value of start node and then appending it to open list'''
         start_node.f_value = self.find_f_value(start_node, goal_matrix)
         self.open.append(start_node)
+        '''many nodes can be duplicated when heuristic function is difference between matrices
+        to avoid that, we are appending every already explored matrices to list
+        so that if already explored child node is already explored, its childre aren't generated again'''
+        already_explored = []
         while True:
             current_node = self.open[0]
+            already_explored.append(current_node.matrix)
             current_node.print_node_info()
             '''stop condition (when current matrix becomes equal to goal matrix)'''
             if self.find_h_value(current_node.matrix, goal_matrix) == 0:
@@ -25,8 +30,10 @@ class Puzzle:
             '''creating childs by moving the blank i.e. _ in all possible directions,
             finding their heuristic (f) values and appending them to open list'''
             for i in current_node.generate_child_nodes():
-                i.f_value = self.find_f_value(i, goal_matrix)
-                self.open.append(i)
+                if i.matrix not in already_explored:
+                    already_explored.append(i.matrix)
+                    i.f_value = self.find_f_value(i, goal_matrix)
+                    self.open.append(i)
             '''add current node to closed list and delete it from open list'''
             self.closed.append(current_node)
             del self.open[0]
