@@ -1,3 +1,5 @@
 .idea
-.txt
-.key
+*.txt
+*.key
+*.class
+*temp*
