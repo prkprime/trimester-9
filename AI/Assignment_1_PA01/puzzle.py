@@ -16,9 +16,7 @@ class Puzzle:
         '''finding the f value of start node and then appending it to open list'''
         start_node.f_value = self.find_f_value(start_node, goal_matrix)
         self.open.append(start_node)
-        num_of_nodes_checked = 0
-        while True:
-            num_of_nodes_checked += 1
+        while len(self.open) != 0:
             current_node = self.open[0]
             current_node.print_node_info()
             '''stop condition (when current matrix becomes equal to goal matrix)'''
@@ -38,7 +36,7 @@ class Puzzle:
             '''we have to sort open list according to f values of nodes so that
             we in next loop, we will check node with list '''
             self.open.sort(key = lambda node:node.f_value)
-        print('\nGoal was reached after checking {} state spaces'.format(num_of_nodes_checked))
+        print('\nGoal was reached after checking {} state spaces'.format(len(self.closed+1)))
 
 
     def accept_matrix(self):
