@@ -36,7 +36,7 @@ class Puzzle:
             '''we have to sort open list according to f values of nodes so that
             we in next loop, we will check node with list '''
             self.open.sort(key = lambda node:node.f_value)
-        print('\nGoal was reached after checking {} state spaces'.format(len(self.closed+1)))
+        print('\nGoal was reached after checking {} state spaces'.format(1+len(self.closed)))
 
 
     def accept_matrix(self):
