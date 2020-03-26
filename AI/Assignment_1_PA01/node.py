@@ -1,8 +1,10 @@
 class Node:
-    def __init__(self, matrix, level, f_value):
+    def __init__(self, matrix, level, f_value, parent=None, move='Start'):
         self.matrix = matrix
         self.level = level
         self.f_value = f_value
+        self.parent = parent
+        self.move = move
 
     def print_node_info(self):
         '''prints the node info'''
@@ -20,24 +22,24 @@ class Node:
         '''now we have to find possible values values that our blank can move'''
         possible_positions = []
         if x_blank-1 != -1:
-            possible_positions.append([x_blank-1, y_blank])
+            possible_positions.append(([x_blank-1, y_blank], 'up'))
         if x_blank+1 != len(self.matrix):
-            possible_positions.append([x_blank+1, y_blank])
+            possible_positions.append(([x_blank+1, y_blank], 'down'))
         if y_blank-1 != -1:
-            possible_positions.append([x_blank, y_blank-1])
+            possible_positions.append(([x_blank, y_blank-1], 'left'))
         if y_blank+1 != len(self.matrix):
-            possible_positions.append([x_blank, y_blank+1])
+            possible_positions.append(([x_blank, y_blank+1], 'right'))
         '''now we are going to generate the child nodes that by swapping blank with
         all possible values and append them to list and then return that list'''
         children_nodes = []
-        for new_position in possible_positions:
+        for new_position, move in possible_positions:
             '''
             temp_matrix = self.matrix
             above line doesn't work because changes in temp_matrix changes the self.matrix
             '''
             temp_matrix = self.create_duplicate_matrix(self.matrix)
             temp_matrix[x_blank][y_blank], temp_matrix[new_position[0]][new_position[1]] = temp_matrix[new_position[0]][new_position[1]], temp_matrix[x_blank][y_blank]
-            children_nodes.append(Node(temp_matrix, self.level+1, 0))
+            children_nodes.append(Node(temp_matrix, self.level+1, 0, self, move))
         return children_nodes
 
     def find_blank(self):

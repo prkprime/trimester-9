@@ -5,6 +5,7 @@ class Puzzle:
         self.size = size
         self.open = []
         self.closed = []
+        self.solution = []
 
     def dundundundun(self):
         print('Enter the start matrix \n(whitespace seperated n numbers on n lines) \n( _ for blank)')
@@ -18,9 +19,12 @@ class Puzzle:
         self.open.append(start_node)
         while len(self.open) != 0:
             current_node = self.open[0]
-            current_node.print_node_info()
             '''stop condition (when current matrix becomes equal to goal matrix)'''
             if self.find_h_value(current_node.matrix, goal_matrix) == 0:
+                while current_node.parent != None:
+                    self.solution.append(current_node)
+                    current_node = current_node.parent
+                self.solution.append(current_node)
                 break
             '''creating childs by moving the blank i.e. _ in all possible directions,
             finding their heuristic (f) values and appending them to open list'''
@@ -36,8 +40,12 @@ class Puzzle:
             '''we have to sort open list according to f values of nodes so that
             we in next loop, we will check node with list '''
             self.open.sort(key = lambda node:node.f_value)
+        for i in reversed(self.solution):
+            i.print_node_info()
         print('\nGoal was reached after checking {} state spaces'.format(1+len(self.closed)))
-
+        print('Solution moves are : ')
+        for i in reversed(self.solution):
+            print('\t', i.move)
 
     def accept_matrix(self):
         '''accepts square of given size'''
