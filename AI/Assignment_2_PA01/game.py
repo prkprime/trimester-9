@@ -115,7 +115,7 @@ class Game:
                     else:
                         print('Invalid Move... Use your eyes hooman')
             else:
-                print('My turn now... let\'s thing beep beep boop boop')
+                print('My turn now... let\'s think beep beep boop boop')
                 m, move_x, move_y = self.max()
                 self.current_state[move_x][move_y] = 'O'
                 print(f'I put my O on ({move_x}, {move_y})')
